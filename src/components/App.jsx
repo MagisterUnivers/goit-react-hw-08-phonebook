@@ -1,13 +1,4 @@
-import { ContactForm } from './ContactForm/ContactForm';
-import ContactsList from './ContactList/ContactList';
-import { Filter } from './Filter/Filter';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectContacts, selectFilter } from 'redux/contactsSelectors';
-import { setFilter } from 'redux/contactsSlice';
-import styled from 'styled-components';
-import { fetchContacts, addContact, deleteContact } from '../redux/operations';
-import { Suspense, useEffect } from 'react';
-import Navigation from './Navigation';
+import { Suspense } from 'react';
 import LoginPage from 'pages/LoginPage';
 import RegisterPage from 'pages/RegisterPage';
 import ContactsPage from 'pages/ContactsPage';
@@ -58,9 +49,9 @@ export function App() {
 |============================
 */
 
-const StyledButton = styled.button`
-  background-color: tomato;
-  &:hover {
-    background-color: teal;
-  }
-`;
+// const StyledButton = styled.button`
+//   background-color: tomato;
+//   &:hover {
+//     background-color: teal;
+//   }
+// `;
