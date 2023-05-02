@@ -4,8 +4,8 @@ import styled from 'styled-components';
 export const NavBar = () => {
   const navMap = [
     { path: '/', title: 'Register' },
-    { path: 'login', title: 'Login' },
-    { path: 'contacts', title: 'Contacts' },
+    { path: '/login', title: 'Login' },
+    { path: '/contacts', title: 'Contacts' },
   ];
   return (
     <SideBar>
