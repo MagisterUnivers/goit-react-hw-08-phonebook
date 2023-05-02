@@ -1,4 +1,6 @@
+import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { selectUser } from 'redux/selectors';
 import styled from 'styled-components';
 
 export const NavBar = () => {
@@ -7,6 +9,9 @@ export const NavBar = () => {
     { path: '/login', title: 'Login' },
     { path: '/contacts', title: 'Contacts' },
   ];
+
+  const { name } = useSelector(selectUser);
+
   return (
     <SideBar>
       {navMap.map(({ path, title }) => (
@@ -16,7 +21,8 @@ export const NavBar = () => {
       ))}
       <UserStatus>
         <h1>
-          Welcome <Username>name</Username>
+          Welcome{' '}
+          {name ? <Username>{name}</Username> : <Username>Guest</Username>}
         </h1>
         <LogoutButton>Log Out</LogoutButton>
       </UserStatus>
