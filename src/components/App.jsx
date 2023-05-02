@@ -6,7 +6,13 @@ import { selectContacts, selectFilter } from 'redux/contactsSelectors';
 import { setFilter } from 'redux/contactsSlice';
 import styled from 'styled-components';
 import { fetchContacts, addContact, deleteContact } from '../redux/operations';
-import { useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
+import Navigation from './Navigation';
+import LoginPage from 'pages/LoginPage';
+import RegisterPage from 'pages/RegisterPage';
+import ContactsPage from 'pages/ContactsPage';
+import { Route, Routes } from 'react-router-dom';
+import { Layout } from './Layout';
 
 export function App() {
   const contacts = useSelector(selectContacts);
@@ -99,22 +105,26 @@ export function App() {
 
   return (
     <>
-      <StyledButton type="submit" title="hello">
-        I am styled
-      </StyledButton>
-      <input
-        type="text"
-        name="custominput"
-        // value={custominput}
-        className="result"
-        onChange={handleChange}
-        pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-        title="Name"
-        required
-      />
-      <ContactForm handleChange={handleChange} handleSubmit={handleSubmit} />
+      <>
+        <Routes>
+          {' '}
+          <Route path="/" element={<Layout />}>
+            <Route
+              index
+              element={
+                <Suspense fallback={<div>Loading...</div>}>
+                  <RegisterPage />
+                </Suspense>
+              }
+            />
+          </Route>
+          <Route path="login" element={<LoginPage />} />
+          <Route path="contacts" element={<ContactsPage />} />
+        </Routes>
+      </>
+      {/* <ContactForm handleChange={handleChange} handleSubmit={handleSubmit} />
       <Filter handleChange={handleChange} />
-      <ContactsList contacts={filteredContacts} changeId={changeId} />
+      <ContactsList contacts={filteredContacts} changeId={changeId} /> */}
     </>
   );
 }
