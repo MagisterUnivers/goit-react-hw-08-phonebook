@@ -14,6 +14,12 @@ export const NavBar = () => {
           {title}
         </NavItem>
       ))}
+      <UserStatus>
+        <h1>
+          Welcome <Username>name</Username>
+        </h1>
+        <LogoutButton>Log Out</LogoutButton>
+      </UserStatus>
     </SideBar>
   );
 };
@@ -45,4 +51,28 @@ const NavItem = styled(NavLink)`
   &:hover:not(.active) {
     background-color: lightblue;
   }
+`;
+
+const LogoutButton = styled.button`
+  margin-top: 20px;
+  padding: 10px;
+  background-color: blue;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  border: none;
+  &:hover {
+    background-color: darkblue;
+  }
+`;
+
+const UserStatus = styled.div`
+  position: absolute;
+  bottom: 10%;
+  text-align: inherit;
+`;
+
+const Username = styled.span`
+  font-weight: bold;
+  color: tomato;
 `;
