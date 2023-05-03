@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import LoginPage from 'pages/LoginPage';
 import RegisterPage from 'pages/RegisterPage';
 import ContactsPage from 'pages/ContactsPage';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import { Layout } from './Layout';
 import {
   selectAuthError,
@@ -17,28 +17,37 @@ import { clearError } from 'redux/Auth/authSlice';
 
 export function App() {
   const dispatch = useDispatch();
+  const location = useLocation();
   const isLoading = useSelector(selectUserLoading);
   const isAuthError = useSelector(selectAuthError);
   const isOnline = useSelector(selectIsOnline);
-
-  useEffect(() => {
-    dispatch(refreshThunk());
-    dispatch(clearError());
-  }, [dispatch]); // esling-ignore-line
+  const isRegistrationPage = location.pathname === '/';
 
   // useEffect(() => {
   //   dispatch(refreshThunk());
-  //   setTimeout(() => {
-  //     dispatch(clearError());
-  //   }, 1000);
-  // }, [dispatch]);
+  //   dispatch(clearError());
+  // }, [dispatch]); // esling-ignore-line
+
+  useEffect(() => {
+    dispatch(refreshThunk());
+    setTimeout(() => {
+      dispatch(clearError());
+    }, 1000);
+  }, [dispatch]);
 
   return isLoading ? (
     <div>
       {isAuthError ? (
         <>
           <h1>{isAuthError}</h1>
-          <h2>Check username and password, reload the page and try again</h2>
+          {isRegistrationPage ? (
+            <h2>
+              Try another email, username and password, reload the page and try
+              again again
+            </h2>
+          ) : (
+            <h2>Check username and password, reload the page and try again</h2>
+          )}
         </>
       ) : (
         <h1>Loading...</h1>

@@ -6,7 +6,12 @@ export const Filter = ({ handleChange }) => {
       {' '}
       <label>
         <h2 className="title">Find Contacts by name</h2>
-        <input name="filter" className="result" onChange={handleChange}></input>
+        <input
+          name="filter"
+          className="result"
+          onChange={handleChange}
+          placeholder="Search name to find..."
+        ></input>
       </label>
     </div>
   );

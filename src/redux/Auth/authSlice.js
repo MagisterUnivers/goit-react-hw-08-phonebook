@@ -31,7 +31,7 @@ const authSlice = createSlice({
     },
     [registrationThunk.rejected]: (state, { payload }) => {
       state.error = payload;
-      state.loading = false;
+      // state.loading = false;
     },
     [loginThunk.pending]: (state, { payload }) => {
       state.loading = true;
@@ -54,6 +54,7 @@ const authSlice = createSlice({
       state.user = '';
       state.token = '';
       state.online = false;
+      state.loading = false;
       state.error = null;
     },
     [logoutThunk.rejected]: (state, { payload }) => {

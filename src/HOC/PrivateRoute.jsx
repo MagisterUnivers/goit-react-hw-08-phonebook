@@ -12,3 +12,5 @@ export const PrivateRoute = ({ children }) => {
 
   return children;
 };
+
+// High Order Components

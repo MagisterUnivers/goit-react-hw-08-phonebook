@@ -1,16 +1,19 @@
 import { useSelector } from 'react-redux';
-import { Navigate, useLocation } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { selectIsOnline } from '../redux/selectors';
 
-const publicRoutes = ['/login', '/'];
+// const publicRoutes = ['/login', '/'];
 
 export const PublicRoute = ({ children }) => {
-  const location = useLocation();
+  // const location = useLocation();
+  // const fromPage = location.state?.from.pathname || '/';
+  // const isPublicRoute = publicRoutes.includes(fromPage);
   const isOnline = useSelector(selectIsOnline);
-  const fromPage = location.state?.from.pathname || '/';
-  const isPublicRoute = publicRoutes.includes(fromPage);
-  if (isOnline && !isPublicRoute) {
-    return <Navigate to={fromPage} />;
+
+  if (isOnline) {
+    return <Navigate to="/contacts" />;
   }
   return children;
 };
+
+// High Order Components

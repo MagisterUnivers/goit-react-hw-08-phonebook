@@ -90,7 +90,7 @@ const RegisterPage = () => {
           title="Минимум 8 символов. Обязательно содержит как минимум одну заглавную букву, одну строчную букву и одну цифру."
           placeholder="Password..."
         />
-        <button style={styles.button}>SignUP</button>
+        <button style={styles.button}>Sign Up</button>
       </form>
     </div>
   );
