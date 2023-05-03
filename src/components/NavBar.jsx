@@ -1,9 +1,12 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { logoutThunk } from 'redux/Auth/authOperations';
 import { selectUser } from 'redux/selectors';
 import styled from 'styled-components';
 
 export const NavBar = () => {
+  const dispatch = useDispatch();
+
   const navMap = [
     { path: '/', title: 'Register' },
     { path: '/login', title: 'Login' },
@@ -24,7 +27,13 @@ export const NavBar = () => {
           Welcome{' '}
           {name ? <Username>{name}</Username> : <Username>Guest</Username>}
         </h1>
-        <LogoutButton>Log Out</LogoutButton>
+        <LogoutButton
+          onClick={() => {
+            dispatch(logoutThunk());
+          }}
+        >
+          Log Out
+        </LogoutButton>
       </UserStatus>
     </SideBar>
   );

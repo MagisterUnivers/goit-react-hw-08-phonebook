@@ -65,7 +65,7 @@ const ContactsPage = () => {
       //   ...prevContacts,
       //   { name: USER_NAME, number: USER_NUMBER, id: nanoid() },
       // ]);
-      dispatch(addContact({ name: USER_NAME, phone: USER_NUMBER }));
+      dispatch(addContact({ name: USER_NAME, number: USER_NUMBER }));
     } else {
       alert(`${USER_NAME} already in contacts`);
     }
