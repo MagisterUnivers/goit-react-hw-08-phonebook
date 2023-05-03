@@ -69,6 +69,8 @@ const RegisterPage = () => {
           style={styles.input}
           name="name"
           type="text"
+          pattern="^[a-zA-Z0-9_]{3,16}$"
+          title="Может содержать только буквы, цифры и знак подчеркивания. Длина должна быть от 3 до 16 символов."
           placeholder="Name..."
         />
         <input
@@ -76,12 +78,16 @@ const RegisterPage = () => {
           name="email"
           autoComplete="off"
           type="text"
+          pattern="^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$"
+          title="Должна содержать символ '@' и '.' Нельзя использовать специальные символы, кроме '-' и '_'"
           placeholder="Email..."
         />
         <input
           style={styles.input}
           name="password"
           type="password"
+          pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+          title="Минимум 8 символов. Обязательно содержит как минимум одну заглавную букву, одну строчную букву и одну цифру."
           placeholder="Password..."
         />
         <button style={styles.button}>SignUP</button>

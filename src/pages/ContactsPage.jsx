@@ -2,9 +2,13 @@ import { ContactForm } from '../components/ContactForm/ContactForm';
 import ContactsList from '../components/ContactList/ContactList';
 import { Filter } from '../components/Filter/Filter';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectContacts, selectFilter } from 'redux/contactsSelectors';
-import { setFilter } from 'redux/contactsSlice';
-import { fetchContacts, addContact, deleteContact } from '../redux/operations';
+import { selectContacts, selectFilter } from 'redux/Contacts/contactsSelectors';
+import { setFilter } from 'redux/Contacts/contactsSlice';
+import {
+  fetchContacts,
+  addContact,
+  deleteContact,
+} from '../redux/Contacts/operations';
 import { useEffect } from 'react';
 
 const ContactsPage = () => {

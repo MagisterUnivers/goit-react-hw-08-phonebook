@@ -82,7 +82,7 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import { contactsReducer } from './contactsSlice';
+import { contactsReducer } from './Contacts/contactsSlice';
 
 const persistConfig = {
   key: 'token',

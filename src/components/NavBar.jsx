@@ -29,13 +29,17 @@ export const NavBar = () => {
           Welcome{' '}
           {name ? <Username>{name}</Username> : <Username>Guest</Username>}
         </h1>
-        <LogoutButton
-          onClick={() => {
-            dispatch(logoutThunk());
-          }}
-        >
-          Log Out
-        </LogoutButton>
+        {isOnline ? (
+          <LogoutButton
+            onClick={() => {
+              dispatch(logoutThunk());
+            }}
+          >
+            Log Out
+          </LogoutButton>
+        ) : (
+          <div></div>
+        )}
       </UserStatus>
     </SideBar>
   ) : (
@@ -50,13 +54,17 @@ export const NavBar = () => {
           Welcome{' '}
           {name ? <Username>{name}</Username> : <Username>Guest</Username>}
         </h1>
-        <LogoutButton
-          onClick={() => {
-            dispatch(logoutThunk());
-          }}
-        >
-          Log Out
-        </LogoutButton>
+        {isOnline ? (
+          <LogoutButton
+            onClick={() => {
+              dispatch(logoutThunk());
+            }}
+          >
+            Log Out
+          </LogoutButton>
+        ) : (
+          <div></div>
+        )}
       </UserStatus>
     </SideBar>
   );

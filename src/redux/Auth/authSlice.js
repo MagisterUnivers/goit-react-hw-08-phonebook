@@ -15,11 +15,23 @@ const initialState = {
 const authSlice = createSlice({
   name: '@@auth',
   initialState,
+  reducers: {
+    clearError: state => {
+      state.error = null;
+    },
+  },
   extraReducers: {
+    [registrationThunk.pending]: (state, { payload }) => {
+      state.loading = true;
+    },
     [registrationThunk.fulfilled]: (state, { payload }) => {
       state.user = payload.user;
       state.token = payload.token;
       state.online = true;
+    },
+    [registrationThunk.rejected]: (state, { payload }) => {
+      state.error = payload;
+      state.loading = false;
     },
     [loginThunk.pending]: (state, { payload }) => {
       state.loading = true;
@@ -29,11 +41,24 @@ const authSlice = createSlice({
       state.token = payload.token;
       state.online = true;
       state.loading = false;
+      state.error = null;
+    },
+    [loginThunk.rejected]: (state, { payload }) => {
+      state.error = payload;
+      // state.loading = false;
+    },
+    [logoutThunk.pending]: (state, { payload }) => {
+      state.loading = true;
     },
     [logoutThunk.fulfilled]: (state, { payload }) => {
       state.user = '';
       state.token = '';
       state.online = false;
+      state.error = null;
+    },
+    [logoutThunk.rejected]: (state, { payload }) => {
+      state.error = payload;
+      state.loading = false;
     },
     [refreshThunk.pending]: (state, { payload }) => {
       state.loading = true;
@@ -52,3 +77,4 @@ const authSlice = createSlice({
 });
 
 export const authReducer = authSlice.reducer;
+export const { clearError } = authSlice.actions;

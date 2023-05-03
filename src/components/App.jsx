@@ -4,20 +4,34 @@ import RegisterPage from 'pages/RegisterPage';
 import ContactsPage from 'pages/ContactsPage';
 import { Route, Routes } from 'react-router-dom';
 import { Layout } from './Layout';
-import { selectAuthError, selectUserLoading } from 'redux/selectors';
+import {
+  selectAuthError,
+  selectIsOnline,
+  selectUserLoading,
+} from 'redux/selectors';
 import { refreshThunk } from 'redux/Auth/authOperations';
 import { useDispatch, useSelector } from 'react-redux';
 import { PublicRoute } from 'HOC/PublicRoute';
 import { PrivateRoute } from 'HOC/PrivateRoute';
+import { clearError } from 'redux/Auth/authSlice';
 
 export function App() {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectUserLoading);
   const isAuthError = useSelector(selectAuthError);
+  const isOnline = useSelector(selectIsOnline);
 
   useEffect(() => {
     dispatch(refreshThunk());
+    dispatch(clearError());
   }, [dispatch]); // esling-ignore-line
+
+  // useEffect(() => {
+  //   dispatch(refreshThunk());
+  //   setTimeout(() => {
+  //     dispatch(clearError());
+  //   }, 1000);
+  // }, [dispatch]);
 
   return isLoading ? (
     <div>
@@ -63,6 +77,10 @@ export function App() {
             <Route path="add" element={<AddContact />} />
             <Route path="edit/:id" element={<EditContact />} /> */}
           </Route>
+          <Route
+            path="*"
+            element={isOnline ? <ContactsPage /> : <LoginPage />}
+          />
           {/* <Route path="*" element={<NotFound />} /> */}
         </Route>
       </Routes>
