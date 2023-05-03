@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginThunk, logoutThunk } from '../redux/Auth/authOperations';
+import { loginThunk } from '../redux/Auth/authOperations';
 import { useNavigate } from 'react-router-dom';
 import { selectAuthError, selectUserLoading } from '../redux/selectors';
 
@@ -109,14 +109,7 @@ const LoginPage = () => {
           placeholder="Password..."
           type="password"
         />
-        <button
-          style={styles.button}
-          onClick={() => {
-            dispatch(logoutThunk());
-          }}
-        >
-          Login
-        </button>
+        <button style={styles.button}>Login</button>
       </form>
     </div>
   );
