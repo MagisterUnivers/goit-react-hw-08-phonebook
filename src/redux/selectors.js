@@ -6,6 +6,7 @@ export const selectFilter = state => state.filter;
 export const selectUser = state => state.auth.user;
 export const selectIsOnline = state => state.auth.online;
 export const selectUserLoading = state => state.auth.loading;
+export const selectAuthError = state => state.auth.error;
 
 export const selectTheme = createSelector([state => state.theme], theme => {
   return theme;

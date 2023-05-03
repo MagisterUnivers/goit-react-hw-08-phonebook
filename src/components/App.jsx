@@ -4,7 +4,7 @@ import RegisterPage from 'pages/RegisterPage';
 import ContactsPage from 'pages/ContactsPage';
 import { Route, Routes } from 'react-router-dom';
 import { Layout } from './Layout';
-import { selectUserLoading } from 'redux/selectors';
+import { selectAuthError, selectUserLoading } from 'redux/selectors';
 import { refreshThunk } from 'redux/Auth/authOperations';
 import { useDispatch, useSelector } from 'react-redux';
 import { PublicRoute } from 'HOC/PublicRoute';
@@ -13,13 +13,22 @@ import { PrivateRoute } from 'HOC/PrivateRoute';
 export function App() {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectUserLoading);
+  const isAuthError = useSelector(selectAuthError);
+
   useEffect(() => {
     dispatch(refreshThunk());
   }, [dispatch]); // esling-ignore-line
 
   return isLoading ? (
     <div>
-      <h1>Loading...</h1>
+      {isAuthError ? (
+        <>
+          <h1>{isAuthError}</h1>
+          <h2>Check username and password, reload the page and try again</h2>
+        </>
+      ) : (
+        <h1>Loading...</h1>
+      )}
     </div>
   ) : (
     <>

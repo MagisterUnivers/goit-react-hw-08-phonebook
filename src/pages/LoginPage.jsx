@@ -2,12 +2,13 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginThunk, logoutThunk } from '../redux/Auth/authOperations';
 import { useNavigate } from 'react-router-dom';
-import { selectUserLoading } from '../redux/selectors';
+import { selectAuthError, selectUserLoading } from '../redux/selectors';
 
 const LoginPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isLoadingUser = useSelector(selectUserLoading);
+  const isAuthError = useSelector(selectAuthError);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -28,13 +29,22 @@ const LoginPage = () => {
   //     }
   //   });
 
-  if (isLoadingUser) {
+  if (isLoadingUser && isAuthError) {
     return (
       <div>
-        <h1>Loading...</h1>
+        <h1>{isAuthError}</h1>
+        <h2>Try to login again</h2>
       </div>
     );
   }
+
+  // if (isLoadingUser) {
+  //   return (
+  //     <div>
+  //       <h1>Loading...</h1>
+  //     </div>
+  //   );
+  // }
 
   const styles = {
     form: {
