@@ -1,11 +1,11 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginThunk, logoutThunk } from '../redux/Auth/authOperations';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { selectUserLoading } from '../redux/selectors';
 
 const LoginPage = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const isLoadingUser = useSelector(selectUserLoading);
 
@@ -14,15 +14,24 @@ const LoginPage = () => {
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    dispatch(loginThunk({ email, password }));
-    // .then(() => navigate('/contacts'))
-    // .catch(() => alert('Try again'));
+    dispatch(loginThunk({ email, password }))
+      .then(() => navigate('/contacts'))
+      .catch(() => alert('Try again'));
     form.reset();
   };
+  // dispatch(loginThunk({ email, password }))
+  //   .then(() => form.reset())
+  //   .catch(error => {
+  //     alert('Try again');
+  //     if (error.response.status !== 400) {
+  //       navigate('/contacts');
+  //     }
+  //   });
+
   if (isLoadingUser) {
     return (
-      <div className="flex justify-center items-center h-screen bg-darkMain">
-        <h1 className="text-white text-4xl">Loading...</h1>
+      <div>
+        <h1>Loading...</h1>
       </div>
     );
   }
@@ -75,9 +84,9 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-darkMain">
+    <div>
       <form style={styles.form} onSubmit={handleSubmit}>
-        <h1 className="text-center text-2xl">Login Form</h1>
+        <h1>Login Form</h1>
         <input
           style={styles.input}
           name="email"

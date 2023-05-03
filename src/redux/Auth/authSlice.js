@@ -31,7 +31,6 @@ const authSlice = createSlice({
       state.loading = false;
     },
     [logoutThunk.fulfilled]: (state, { payload }) => {
-      console.log('Очищаємо нашого юзера');
       state.user = '';
       state.token = '';
       state.online = false;

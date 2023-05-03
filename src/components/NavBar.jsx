@@ -1,21 +1,44 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { logoutThunk } from 'redux/Auth/authOperations';
-import { selectUser } from 'redux/selectors';
+import { selectIsOnline, selectUser } from 'redux/selectors';
 import styled from 'styled-components';
 
 export const NavBar = () => {
   const dispatch = useDispatch();
+  const isOnline = useSelector(selectIsOnline);
 
   const navMap = [
     { path: '/', title: 'Register' },
     { path: '/login', title: 'Login' },
-    { path: '/contacts', title: 'Contacts' },
   ];
+
+  const navMap2 = [{ path: '/contacts', title: 'Contacts' }];
 
   const { name } = useSelector(selectUser);
 
-  return (
+  return isOnline ? (
+    <SideBar>
+      {navMap2.map(({ path, title }) => (
+        <NavItem key={path} to={path}>
+          {title}
+        </NavItem>
+      ))}
+      <UserStatus>
+        <h1>
+          Welcome{' '}
+          {name ? <Username>{name}</Username> : <Username>Guest</Username>}
+        </h1>
+        <LogoutButton
+          onClick={() => {
+            dispatch(logoutThunk());
+          }}
+        >
+          Log Out
+        </LogoutButton>
+      </UserStatus>
+    </SideBar>
+  ) : (
     <SideBar>
       {navMap.map(({ path, title }) => (
         <NavItem key={path} to={path}>

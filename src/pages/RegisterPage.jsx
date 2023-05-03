@@ -62,9 +62,9 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-darkMain">
+    <div>
       <form style={styles.form} onSubmit={handleSubmit}>
-        <h1 className="text-center text-2xl">Registration form </h1>
+        <h1>Registration form </h1>
         <input
           style={styles.input}
           name="name"
