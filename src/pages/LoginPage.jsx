@@ -1,11 +1,11 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginThunk } from '../redux/Auth/authOperations';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { selectAuthError, selectUserLoading } from '../redux/selectors';
 
 const LoginPage = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const dispatch = useDispatch();
   const isLoadingUser = useSelector(selectUserLoading);
   const isAuthError = useSelector(selectAuthError);
@@ -15,9 +15,9 @@ const LoginPage = () => {
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    dispatch(loginThunk({ email, password }))
-      .then(() => navigate('/contacts'))
-      .catch(() => alert('Try again'));
+    dispatch(loginThunk({ email, password }));
+    // .then(() => navigate('/contacts'))
+    // .catch(() => alert('Try again'));
     form.reset();
   };
   // dispatch(loginThunk({ email, password }))
