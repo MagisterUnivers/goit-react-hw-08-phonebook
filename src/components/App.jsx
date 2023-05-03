@@ -1,12 +1,27 @@
-import { Suspense } from 'react';
+import { useEffect } from 'react';
 import LoginPage from 'pages/LoginPage';
 import RegisterPage from 'pages/RegisterPage';
 import ContactsPage from 'pages/ContactsPage';
 import { Route, Routes } from 'react-router-dom';
 import { Layout } from './Layout';
+import { selectUserLoading } from 'redux/selectors';
+import { refreshThunk } from 'redux/Auth/authOperations';
+import { useDispatch, useSelector } from 'react-redux';
+import { PublicRoute } from 'HOC/PublicRoute';
+import { PrivateRoute } from 'HOC/PrivateRoute';
 
 export function App() {
-  return (
+  const dispatch = useDispatch();
+  const isLoading = useSelector(selectUserLoading);
+  useEffect(() => {
+    dispatch(refreshThunk());
+  }, [dispatch]); // esling-ignore-line
+
+  return isLoading ? (
+    <div>
+      <h1>Loading...</h1>
+    </div>
+  ) : (
     <>
       <Routes>
         {' '}
@@ -14,20 +29,27 @@ export function App() {
           <Route
             index
             element={
-              <Suspense fallback={<div>Loading...</div>}>
+              <PublicRoute>
                 <RegisterPage />
-              </Suspense>
+              </PublicRoute>
             }
           />
           <Route
             path="login"
             element={
-              <Suspense fallback={<div>Loading...</div>}>
+              <PublicRoute>
                 <LoginPage />
-              </Suspense>
+              </PublicRoute>
             }
           />
-          <Route path="contacts" element={<ContactsPage />}>
+          <Route
+            path="contacts"
+            element={
+              <PrivateRoute>
+                <ContactsPage />
+              </PrivateRoute>
+            }
+          >
             {/* <Route path="/" element={<ContactsList />} />
             <Route path="add" element={<AddContact />} />
             <Route path="edit/:id" element={<EditContact />} /> */}
